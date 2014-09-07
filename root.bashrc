@@ -8,4 +8,6 @@ alias ls='ls --color=auto'
 alias ll='ls -hl'
 alias la='ll -a'
 
+alias grep='grep --color=auto'
+
 export EDITOR='vim'
