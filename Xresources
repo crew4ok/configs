@@ -4,54 +4,57 @@ Xft.rgba:	  	  rgb
 Xft.hinting:	  true
 Xft.hintstyle:	  hintfull
 
-URxvt.iconFile: /usr/share/icons/Faience/apps/scalable/Terminal.svg
+Xcursor.theme: Openzone-White-Slim
 
 URxvt.depth: 32
 
 URxvt.scrollstyle: plain 
 URxvt.scrollBar_right: true
 
-URxvt.font: xft:terminus:size=10:antialias=false
-URxvt.boldFont: xft:terminus:size=10
+URxvt.scrollTtyOutput: false
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
+
+URxvt.font: xft:Droid Sans Mono:size=10
+URxvt.boldFont: xft:Droid Sans Mono:size=10
+URxvt.letterSpace: -1
 
 URxvt.termName:rxvt-256color
 
-URxvt.perl-ext-common: default,fullscreen,tabbed
-URxvt.keysym.F11: perl:fullscreen:switch
+URxvt.perl-ext-common: default,tabbed
 URxvt.tabbed.tabbar-fg: 15
 URxvt.tabbed.tabbar-bg: 0
 URxvt.tabbed.tab-fg: 15
 URxvt.tabbed.tab-bg: 4
 
-URxvt*background:	#000000
-URxvt*foreground:	#ffffff
-URxvt*cursorColor:	#55ff55
+URxvt.keysym.Control-Up:   \033[1;5A
+URxvt.keysym.Control-Down:    \033[1;5B
+URxvt.keysym.Control-Left:    \033[1;5D
+URxvt.keysym.Control-Right:    \033[1;5C
 
-! fg/bg for Xorg apps
-*background:	#CFCFD9
-*foreground:	#1C2027
-
-! black
-*color0:	#000000
-*color8:	#555555
-! red
-*color1:	#AA0000
-*color9:	#FF5555
-! green
-*color2:	#00AA00
-*color10:	#55ff55
-! yellow
-*color3:	#aa5500
-*color11:	#ffff55
-! blue
-*color4:	#0000aa
-*color12:	#5555ff
-! magenta
-*color5:	#aa00a8
-*color13:	#ff55ff
-! cyan
-*color6:	#00aaaa
-*color14:	#55ffff
-! white
-*color7:	#aaaaaa
-*color15:	#ffffff
+URxvt.background: #050c12
+*foreground:     #fafcf9
+!black
+*color0:         #808080
+*color8:         #727272
+!red (H:0)
+*color1:         #c88e90
+*color9:         #c77174
+!green (H:120)
+*color2:         #90c88e
+*color10:        #74c771
+!brown/yellow (H:50)
+*color3:         #c8bc8e
+*color11:        #c7b671
+!blue (H:240)
+*color4:         #8e90c8
+*color12:        #7174c7
+!magenta (H:270)
+*color5:         #b28ec8
+*color13:        #9971c7
+!cyan (H:180)
+*color6:         #8ec8c6
+*color14:        #71c7c3
+!white (S:0)
+*color7:         #fafcf9
+*color15:        #c7c7c7
