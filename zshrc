@@ -1,12 +1,11 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/aoksenenko/.oh-my-zsh
+export ZSH=/home/crew4ok/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="clean-custom"
-#ZSH_THEME="in-fino-veritas"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -50,7 +49,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux bundler common-aliases dirhistory docker fasd autojump gem)
+plugins=(git archlinux common-aliases docker gradle)
 
 # User configuration
 
@@ -84,6 +83,50 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+alias rm='rm'
+alias vim='nvim'
+export EDITOR='nvim'
 
-source $HOME/.bashrc
+source $HOME/.fzf-completion.zsh
+source $HOME/.fzf-key-bindings.zsh
+
+function toggle_vpn {
+    local pid_file='/run/openconnect_gp.pid'
+    if [ -f $pid_file ]; then
+        cat $pid_file | xargs sudo kill
+        sudo rm $pid_file
+    else
+        read -r -d '' HOSTS <<- EOM
+        jenkins-vpc.vidible.tv
+        jump-us-east.vidible.aolcloud.net
+        main-virtual.docker.vidible.aolcloud.net
+        docker-remote.docker.vidible.aolcloud.net
+        artifactory-prod.vidible.aolcloud.net
+        consul-stage.vidible.aolcloud.net
+        kibana2.vidible.aolcloud.net
+        kibana.vidible.aolcloud.net
+        rabbitmq-stage.vidible.aolcloud.net
+        rabbitmq.prod.vidible.aolcloud.net
+        confluence.ops.aol.com
+        elasticsearch-master.vidible.aolcloud.net
+        duo.teamaol.com
+        jira.ops.aol.com
+        jenkins2.vidible.aolcloud.net
+        svc.k8s-stage.vidible.aolcloud.net
+        ash-m02.egress.aol.com
+        o2-els-v5-prod.vidible.aolcloud.net
+        o2-els-prod.vidible.aolcloud.net
+EOM
+        HOSTS=$(echo $HOSTS | tr '\n' ' ')
+        sudo openconnect --protocol=gp -u aoksenenko -b gp-frr.remote.aol.com \
+            -s "vpn-slice ${HOSTS} --verbose --dump" --pid-file=/run/openconnect_gp.pid
+    fi
+}
+
+alias goto_jumphost='ssh -tt aoksen@ash-m02.egress.aol.com ssh -tt aoksen@jump.vidible.aolcloud.net'
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/bin/async-profiler:$HOME/bin/flamegraph"
+
+export RUST_SRC_PATH="$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/"
